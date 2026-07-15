@@ -38,7 +38,7 @@ This section highlights how the application's backend handles real-time event (v
 * **Indicators:** When a user is typing an indicator indicating the same is displayed on UI for all users in that chat room. When the user stops typing, the indicator is hidden.
 * **Private Messaging:** Users can recieve and send private messages to any user on the same chat room.
 * **Create a chat room:** Any user can create a new chat room
-* **Moderator privilages:** Mute / Unmute, block / unblock a user.
+* **Moderator privilages:** Mute / unmute, block / unblock a user.
 * **Other features:** Access a list of all available rooms, join a chat room and view a users offline / online status along with last seen timeline.
 
 ---
@@ -67,7 +67,7 @@ npm install
 
 ```bash
 PORT=4002
-MONGO_URL=your_mongodb_connection_string
+MONGO_URI=your_mongodb_connection_string
 ```
 
 #### 4. Navigate to the server directory
