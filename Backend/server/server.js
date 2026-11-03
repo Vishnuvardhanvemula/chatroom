@@ -23,6 +23,7 @@ const upload = multer({
 });
 
 const app = express();
+const PORT = process.env.PORT || 3001;
 
 // Simple CORS for API endpoints (frontend runs on different port)
 app.use((req, res, next) => {
@@ -678,7 +679,7 @@ io.on('connection', async (socket) => {
             }
 
             // Call the summarization endpoint
-            const response = await fetch(`http://localhost:3001/api/pdf/${pdfId}/summarize?roomId=${roomId}`, {
+            const response = await fetch(`http://localhost:${PORT}/api/pdf/${pdfId}/summarize?roomId=${roomId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -950,7 +951,7 @@ app.post('/api/pdf/:id/summarize', async (req, res) => {
 });
 
 // Start server on port 3001 to match frontend
-const PORT = process.env.PORT || 3001;
+// Server port is configured above via process.env.PORT || 3001
 
 // Initialize MongoDB and start server
 async function startServer() {

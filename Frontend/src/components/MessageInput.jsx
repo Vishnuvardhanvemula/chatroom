@@ -3,6 +3,7 @@ import { Button } from './ui/button';
 import { Send, Paperclip, Smile, X } from 'lucide-react';
 import EmojiPicker from 'emoji-picker-react';
 import { toast } from 'sonner';
+import { API_BASE_URL } from '../config/api';
 
 export function MessageInput({ onSendMessage, onTyping, onStopTyping, isMuted }) {
   const [message, setMessage] = useState('');
@@ -67,7 +68,7 @@ export function MessageInput({ onSendMessage, onTyping, onStopTyping, isMuted })
               style: { background: '#000000', color: '#ffffff' }
             });
 
-            const resp = await fetch('http://localhost:3001/api/upload/pdf', {
+            const resp = await fetch(`${API_BASE_URL}/api/upload/pdf`, {
               method: 'POST',
               body: form,
               // Add upload progress handling
@@ -88,7 +89,7 @@ export function MessageInput({ onSendMessage, onTyping, onStopTyping, isMuted })
               });
             } else {
               const json = await resp.json();
-              const url = `http://localhost:3001${json.url}`;
+              const url = `${API_BASE_URL}${json.url}`;
               toast.success(`${f.name} uploaded successfully`, {
                 description: 'PDF is now available in chat',
                 style: { background: '#000000', color: '#ffffff' }
@@ -124,7 +125,7 @@ export function MessageInput({ onSendMessage, onTyping, onStopTyping, isMuted })
                   style: { background: '#000000', color: '#ffffff' }
                 });
 
-                const resp = await fetch('http://localhost:3001/api/upload/video', {
+                const resp = await fetch(`${API_BASE_URL}/api/upload/video`, {
                   method: 'POST',
                   body: form
                 });
@@ -134,7 +135,7 @@ export function MessageInput({ onSendMessage, onTyping, onStopTyping, isMuted })
                 }
 
                 const json = await resp.json();
-                const url = `http://localhost:3001${json.url}`;
+                const url = `${API_BASE_URL}${json.url}`;
 
                 toast.success(`${f.name} uploaded successfully`, {
                   description: 'Video is now available in chat',
@@ -286,7 +287,7 @@ export function MessageInput({ onSendMessage, onTyping, onStopTyping, isMuted })
   return (
     <form
       onSubmit={handleSubmit}
-      className="p-4 border-t border-[var(--color-secondary)] bg-[var(--color-secondary)] dark:bg-[var(--color-primary)]"
+      className="p-3 sm:p-4 border-t border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-950/95 backdrop-blur-md transition-colors"
     >
       {/* Selected files preview */}
       {files.length > 0 && (
@@ -329,7 +330,7 @@ export function MessageInput({ onSendMessage, onTyping, onStopTyping, isMuted })
         </div>
       )}
 
-      <div className="flex items-center  gap-2 text-white">
+      <div className="flex items-end gap-2 text-slate-700 dark:text-slate-200">
         {/* Emoji toggle */}
         <div className="relative">
           <Button
@@ -404,14 +405,14 @@ export function MessageInput({ onSendMessage, onTyping, onStopTyping, isMuted })
           }}
           placeholder={isMuted ? 'You are muted' : 'Type a message...'}
           disabled={isMuted}
-          className="flex-1 px-4 py-2 rounded-full border focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-slate-800 dark:border-slate-700 resize-none min-h-[40px] max-h-[150px] overflow-y-auto"
+          className="flex-1 px-4 py-3 rounded-2xl border text-sm md:text-base leading-relaxed bg-slate-100 dark:bg-slate-900 border-slate-300/80 dark:border-slate-700/80 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/80 focus:border-transparent transition-all resize-none min-h-[46px] max-h-[150px] overflow-y-auto"
         />
 
         {/* Send */}
         <Button
           type="submit"
           disabled={(message.trim() === '' && files.length === 0) || isMuted}
-          className="rounded-full px-6 bg-gradient-to-r from-indigo-600 to-indigo-900 text-white hover:opacity-90"
+          className="rounded-2xl px-5 h-11 bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 text-white shadow-md shadow-indigo-600/20 disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center justify-center"
         >
           <Send className="w-4 h-4" />
         </Button>

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useModeratorGuard } from '../hooks/useModeratorGuard';
 import { Button } from './ui/button';
 import { Shield, UserCheck, UserX } from 'lucide-react';
+import { API_BASE_URL } from '../config/api';
 
 export function ModeratorSettings() {
   const isModerator = useModeratorGuard();
@@ -11,7 +12,7 @@ export function ModeratorSettings() {
   useEffect(() => {
     if (!isModerator) return;
 
-    fetch('http://localhost:3001/api/users')
+    fetch(`${API_BASE_URL}/api/users`)
       .then(res => res.json())
       .then(data => {
         setUsers(data);
@@ -26,7 +27,7 @@ export function ModeratorSettings() {
   const toggleModeratorStatus = async (userId, makeModarator) => {
     try {
       const endpoint = makeModarator ? 'make-moderator' : 'remove-moderator';
-      const response = await fetch(`http://localhost:3001/api/users/${endpoint}/${userId}`, {
+      const response = await fetch(`${API_BASE_URL}/api/users/${endpoint}/${userId}`, {
         method: 'POST'
       });
 

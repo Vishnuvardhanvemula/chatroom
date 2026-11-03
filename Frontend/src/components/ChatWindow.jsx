@@ -222,11 +222,11 @@ export function ChatWindow({
   };
 
   return (
-    <div className="flex-1 overflow-y-auto p-4 space-y-4">
+    <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 bg-slate-50/50 dark:bg-slate-950/40 transition-colors">
       {Object.entries(groupedMessages).map(([date, dateMessages]) => (
         <div key={date}>
           <div className="sticky top-0 flex justify-center">
-            <span className="bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full text-xs text-gray-500 dark:text-gray-400">
+            <span className="bg-slate-200/80 dark:bg-slate-800/80 backdrop-blur-md px-3.5 py-1 rounded-full text-xs font-medium text-slate-600 dark:text-slate-400 border border-slate-300/40 dark:border-slate-700/40 shadow-sm">
               {date}
             </span>
           </div>
@@ -266,16 +266,16 @@ export function ChatWindow({
                     message.username === currentUsername ? 'flex-row-reverse' : ''
                   }`}>
                     <div
-                      className={`rounded-lg px-4 py-2 max-w-[85%] break-words ${
+                      className={`rounded-2xl px-4 py-2.5 max-w-[85%] md:max-w-[75%] break-words text-sm md:text-base leading-relaxed shadow-sm transition-all ${
                         message.isPinned
-                          ? 'bg-[#8FBC8F] text-[#1A1A1A] ring-2 ring-[#2F4F4F]'
+                          ? 'bg-amber-500/15 text-amber-950 dark:text-amber-100 border-2 border-amber-500/60 rounded-2xl'
                           : message.username === currentUsername
-                          ? 'bg-[#4E6E5D] text-[#F9F9F9]'
-                          : 'bg-[#F3F2ED] text-[#1A1A1A]'
+                          ? 'bg-gradient-to-r from-indigo-600 to-indigo-700 text-white rounded-2xl rounded-tr-xs shadow-indigo-600/15'
+                          : 'bg-white dark:bg-slate-800/95 text-slate-800 dark:text-slate-100 border border-slate-200/90 dark:border-slate-700/60 rounded-2xl rounded-tl-xs'
                       }`}
                     >
                       {message.isPinned && (
-                        <div className="flex items-center gap-1 mb-1 text-[#2F4F4F] font-medium">
+                        <div className="flex items-center gap-1 mb-1 text-amber-600 dark:text-amber-400 font-semibold text-xs">
                           <Pin className="w-3 h-3 fill-current" />
                           <span className="text-xs">Pinned Message</span>
                         </div>
@@ -342,7 +342,7 @@ export function ChatWindow({
                           value={editText}
                           onChange={e => setEditText(e.target.value)}
                           className="flex-1 min-w-0 rounded-md border border-gray-200 
-                                   bg-white text-black px-3 py-2 text-sm focus:outline-none 
+                                   bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 border-slate-300 dark:border-slate-700 px-3 py-2 text-sm focus:outline-none 
                                    focus:ring-2 focus:ring-blue-500 shadow-sm"
                           placeholder="Edit your message..."
                           onKeyDown={e => {

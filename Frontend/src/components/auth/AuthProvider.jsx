@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GOOGLE_CLIENT_ID } from '../../config/auth';
+import { API_BASE_URL } from '../../config/api';
 
 const AuthContext = createContext({
   user: null,
@@ -37,7 +38,7 @@ export function AuthProvider({ children }) {
   const login = async (userData) => {
     try {
       // Check if user exists in backend and get their role
-      const response = await fetch('http://localhost:3001/api/users/auth', {
+      const response = await fetch(`${API_BASE_URL}/api/users/auth`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -94,7 +95,7 @@ export function AuthProvider({ children }) {
       console.log('Updating user with ID:', userId);
       console.log('Update payload:', updates);
       
-      const response = await fetch(`http://localhost:3001/api/users/${userId}`, {
+      const response = await fetch(`${API_BASE_URL}/api/users/${userId}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

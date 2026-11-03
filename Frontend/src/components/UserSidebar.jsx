@@ -47,16 +47,16 @@ export function UserSidebar({
   const sortedUsers = [...sortedOnlineUsers, ...sortedOfflineUsers];
 
   return (
-    <div className="h-full flex flex-col bg-gradient-to-br from-slate-950 via-black to-indigo-950">
+    <div className="h-full flex flex-col bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-800 transition-colors">
       {isMobile && (
-        <div className="p-4 border-b border-indigo-800/50">
+        <div className="p-4 border-b border-slate-100 dark:border-slate-800/60 opacity-80">
           <Button onClick={onClose} variant="ghost" className="w-full justify-start">
             ← Back to Chat
           </Button>
         </div>
       )}
 
-      <div className="p-4 border-b border-indigo-800/50 text-[var(--color-primary)]">
+      <div className="p-4 border-b border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100">
         <h2 className="text-lg font-semibold">
           Users ({users.length})
         </h2>
@@ -69,7 +69,7 @@ export function UserSidebar({
       <div className="flex-1 overflow-y-auto">
         {/* Online Users Section */}
         {sortedOnlineUsers.length > 0 && (
-          <div className="py-2 px-4 bg-indigo-900/20 text-xs font-medium text-indigo-300 uppercase tracking-wider">
+          <div className="py-2 px-4 bg-slate-100 dark:bg-slate-800/60 text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">
             Online
           </div>
         )}
@@ -78,7 +78,7 @@ export function UserSidebar({
             key={user.username}
             initial={isMobile ? { x: 20, opacity: 0 } : false}
             animate={isMobile ? { x: 0, opacity: 1 } : false}
-            className={`p-4 flex items-center gap-3 border-b last:border-b-0 border-indigo-800/50 ${user.username === currentUsername ? 'bg-indigo-900/30' : ''
+            className={`p-3.5 flex items-center gap-3 border-b last:border-b-0 border-slate-100 dark:border-slate-800/60 transition-colors ${user.username === currentUsername ? 'bg-indigo-50/70 dark:bg-indigo-950/40' : 'hover:bg-slate-50 dark:hover:bg-slate-800/30'
               }`}
           >
             <div
@@ -93,7 +93,7 @@ export function UserSidebar({
             </div>
 
             <div className="flex-1">
-              <div className="flex items-center gap-2 text-[var(--color-primary)]">
+              <div className="flex items-center gap-2 text-slate-800 dark:text-slate-100">
                 <span className="font-medium">
                   {user.username}
                   {user.username === currentUsername && ' (You)'}
@@ -175,7 +175,7 @@ export function UserSidebar({
         {/* Offline Users Section */}
         {sortedOfflineUsers.length > 0 && (
           <>
-            <div className="py-2 px-4 bg-gray-900/20 text-xs font-medium text-gray-400 uppercase tracking-wider">
+            <div className="py-2 px-4 bg-slate-100 dark:bg-slate-800/60 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
               Offline
             </div>
             {sortedOfflineUsers.map((user) => (
@@ -183,7 +183,7 @@ export function UserSidebar({
                 key={user.username}
                 initial={isMobile ? { x: 20, opacity: 0 } : false}
                 animate={isMobile ? { x: 0, opacity: 1 } : false}
-                className={`p-4 flex items-center gap-3 border-b last:border-b-0 border-indigo-800/50 ${
+                className={`p-4 flex items-center gap-3 border-b last:border-b-0 border-slate-100 dark:border-slate-800/60 opacity-80 ${
                   user.username === currentUsername ? 'bg-indigo-900/30' : ''
                 }`}
               >
@@ -199,7 +199,7 @@ export function UserSidebar({
                 </div>
 
                 <div className="flex-1">
-                  <div className="flex items-center gap-2 text-[var(--color-primary)] opacity-60">
+                  <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300 opacity-60">
                     <span className="font-medium">
                       {user.username}
                       {user.username === currentUsername && ' (You)'}

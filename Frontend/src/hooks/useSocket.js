@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import io from 'socket.io-client';
+import { API_BASE_URL } from '../config/api';
 import { toast } from 'sonner';
 
 export function useSocket(username, roomId) {
@@ -12,7 +13,7 @@ export function useSocket(username, roomId) {
   useEffect(() => {
     if (!username || !roomId) return;
 
-    const newSocket = io('http://localhost:3001', {
+    const newSocket = io(API_BASE_URL, {
       query: { username, roomId },
       reconnectionAttempts: 5,
       reconnectionDelay: 1000,
